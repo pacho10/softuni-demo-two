@@ -1,0 +1,108 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "SoftuniDemoStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "SoftuniDemoStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "SoftuniDemoStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "SoftuniDemoStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "notificationArns": [],
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/7fdb6e2a91924d2f1262f95ca78dfd0329cea683d5f16f8f06895e56b5b45dd7.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "SoftuniDemoStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "SoftuniDemoStack.assets"
+      ],
+      "metadata": {
+        "/SoftuniDemoStack/homework-cdk-table/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "homeworkcdktable64905336"
+          }
+        ],
+        "/SoftuniDemoStack/homework-send-email-lambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "homeworksendemaillambdaServiceRole16BFAE31"
+          }
+        ],
+        "/SoftuniDemoStack/homework-send-email-lambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "homeworksendemaillambdaServiceRoleDefaultPolicy2562C367"
+          }
+        ],
+        "/SoftuniDemoStack/homework-send-email-lambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "homeworksendemaillambda1049ADA4"
+          }
+        ],
+        "/SoftuniDemoStack/homework-send-email-lambda/DynamoDBEventSource:SoftuniDemoStackhomeworkcdktable2E930130/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "homeworksendemaillambdaDynamoDBEventSourceSoftuniDemoStackhomeworkcdktable2E93013063EA9083"
+          }
+        ],
+        "/SoftuniDemoStack/tableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "tableName"
+          }
+        ],
+        "/SoftuniDemoStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/SoftuniDemoStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/SoftuniDemoStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/SoftuniDemoStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "SoftuniDemoStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
