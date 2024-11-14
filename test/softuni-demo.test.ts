@@ -5,7 +5,7 @@ import 'jest-cdk-snapshot';
 
 // example test. To run these tests, uncomment this file along with the
 // example resource in lib/softuni-demo-stack.ts
-test('SQS Queue Created', () => {
+test('Stack created', () => {
   const app = new cdk.App();
     // WHEN
   const stack = new SoftuniDemo.SoftuniDemoStack(app, 'MyTestStack');

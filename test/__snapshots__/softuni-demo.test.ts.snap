@@ -3,24 +3,14 @@
 exports[`SQS Queue Created 1`] = `
 {
   "Outputs": {
-    "bucketName": {
-      "Value": {
-        "Ref": "plamentestcdkbucketA73C7FF1",
-      },
-    },
     "tableName": {
       "Value": {
-        "Ref": "plamentestcdktable934F5510",
+        "Ref": "homeworkcdktable64905336",
       },
     },
   },
   "Resources": {
-    "plamentestcdkbucketA73C7FF1": {
-      "DeletionPolicy": "Retain",
-      "Type": "AWS::S3::Bucket",
-      "UpdateReplacePolicy": "Retain",
-    },
-    "plamentestcdktable934F5510": {
+    "homeworkcdktable64905336": {
       "DeletionPolicy": "Delete",
       "Properties": {
         "AttributeDefinitions": [
@@ -44,9 +34,307 @@ exports[`SQS Queue Created 1`] = `
             "KeyType": "RANGE",
           },
         ],
+        "StreamSpecification": {
+          "StreamViewType": "NEW_IMAGE",
+        },
       },
       "Type": "AWS::DynamoDB::Table",
       "UpdateReplacePolicy": "Delete",
+    },
+    "homeworksendemaillambda1049ADA4": {
+      "DependsOn": [
+        "homeworksendemaillambdaServiceRoleDefaultPolicy2562C367",
+        "homeworksendemaillambdaServiceRole16BFAE31",
+      ],
+      "Properties": {
+        "Architectures": [
+          "arm64",
+        ],
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "9c16b9fc010ee4da8949cba465084096007aeba71ee9d35ee769f2e2489e28f5.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "SES_EMAIL_ADDRESS": "pmpetkov1983@gmail.com",
+            "TABLE_NAME": {
+              "Ref": "homeworkcdktable64905336",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "homeworksendemaillambdaServiceRole16BFAE31",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs20.x",
+        "Timeout": 10,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "homeworksendemaillambdaDynamoDBEventSourceMyTestStackhomeworkcdktable7A0FFBA1B6E0D8E5": {
+      "Properties": {
+        "BatchSize": 100,
+        "EventSourceArn": {
+          "Fn::GetAtt": [
+            "homeworkcdktable64905336",
+            "StreamArn",
+          ],
+        },
+        "FunctionName": {
+          "Ref": "homeworksendemaillambda1049ADA4",
+        },
+        "StartingPosition": "TRIM_HORIZON",
+      },
+      "Type": "AWS::Lambda::EventSourceMapping",
+    },
+    "homeworksendemaillambdaServiceRole16BFAE31": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "homeworksendemaillambdaServiceRoleDefaultPolicy2562C367": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "dynamodb:ListStreams",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "dynamodb:DescribeStream",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "homeworkcdktable64905336",
+                  "StreamArn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ses:SendEmail",
+                "ses:SendRawEmail",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "homeworksendemaillambdaServiceRoleDefaultPolicy2562C367",
+        "Roles": [
+          {
+            "Ref": "homeworksendemaillambdaServiceRole16BFAE31",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+}
+`;
+
+exports[`Stack created 1`] = `
+{
+  "Outputs": {
+    "tableName": {
+      "Value": {
+        "Ref": "homeworkcdktable64905336",
+      },
+    },
+  },
+  "Resources": {
+    "homeworkcdktable64905336": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "PK",
+            "AttributeType": "S",
+          },
+          {
+            "AttributeName": "SK",
+            "AttributeType": "S",
+          },
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "KeySchema": [
+          {
+            "AttributeName": "PK",
+            "KeyType": "HASH",
+          },
+          {
+            "AttributeName": "SK",
+            "KeyType": "RANGE",
+          },
+        ],
+        "StreamSpecification": {
+          "StreamViewType": "NEW_IMAGE",
+        },
+      },
+      "Type": "AWS::DynamoDB::Table",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "homeworksendemaillambda1049ADA4": {
+      "DependsOn": [
+        "homeworksendemaillambdaServiceRoleDefaultPolicy2562C367",
+        "homeworksendemaillambdaServiceRole16BFAE31",
+      ],
+      "Properties": {
+        "Architectures": [
+          "arm64",
+        ],
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "9c16b9fc010ee4da8949cba465084096007aeba71ee9d35ee769f2e2489e28f5.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "SES_EMAIL_ADDRESS": "pmpetkov1983@gmail.com",
+            "TABLE_NAME": {
+              "Ref": "homeworkcdktable64905336",
+            },
+          },
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "homeworksendemaillambdaServiceRole16BFAE31",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs20.x",
+        "Timeout": 10,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "homeworksendemaillambdaDynamoDBEventSourceMyTestStackhomeworkcdktable7A0FFBA1B6E0D8E5": {
+      "Properties": {
+        "BatchSize": 100,
+        "EventSourceArn": {
+          "Fn::GetAtt": [
+            "homeworkcdktable64905336",
+            "StreamArn",
+          ],
+        },
+        "FunctionName": {
+          "Ref": "homeworksendemaillambda1049ADA4",
+        },
+        "StartingPosition": "TRIM_HORIZON",
+      },
+      "Type": "AWS::Lambda::EventSourceMapping",
+    },
+    "homeworksendemaillambdaServiceRole16BFAE31": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "homeworksendemaillambdaServiceRoleDefaultPolicy2562C367": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "dynamodb:ListStreams",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "dynamodb:DescribeStream",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "homeworkcdktable64905336",
+                  "StreamArn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ses:SendEmail",
+                "ses:SendRawEmail",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "homeworksendemaillambdaServiceRoleDefaultPolicy2562C367",
+        "Roles": [
+          {
+            "Ref": "homeworksendemaillambdaServiceRole16BFAE31",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
   },
 }
