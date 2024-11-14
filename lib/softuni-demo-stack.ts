@@ -1,10 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
-import { LambdaFunction } from 'aws-cdk-lib/aws-events-targets';
 import { Architecture, Code, Function, Runtime, StartingPosition } from 'aws-cdk-lib/aws-lambda';
 import { AttributeType, BillingMode, StreamViewType, Table } from 'aws-cdk-lib/aws-dynamodb';
-import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { DynamoEventSource } from 'aws-cdk-lib/aws-lambda-event-sources';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
