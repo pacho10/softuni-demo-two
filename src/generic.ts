@@ -3,7 +3,7 @@ var ses = new aws.SES({ region: "eu-central-1" });
 
 //const AWS = require('aws-sdk');
 //const ses = AWS.SES();
-exports.handler = async (event) => {
+exports.handler = async (event: any) => {
     for (const record of event.Records) {
         if (record.eventName === 'INSERT') {
             const newItem = record.dynamodb.NewImage;
