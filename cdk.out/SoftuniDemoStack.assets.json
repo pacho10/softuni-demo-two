@@ -1,20 +1,20 @@
 {
   "version": "38.0.1",
   "files": {
-    "9c16b9fc010ee4da8949cba465084096007aeba71ee9d35ee769f2e2489e28f5": {
+    "749be03a8f6f7e3c66c69c20ad9cb25e9df6453e1ae380edc788b48e4d45f904": {
       "source": {
-        "path": "asset.9c16b9fc010ee4da8949cba465084096007aeba71ee9d35ee769f2e2489e28f5",
+        "path": "/Users/A1BB78C/softuni-demo-two",
         "packaging": "zip"
       },
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "9c16b9fc010ee4da8949cba465084096007aeba71ee9d35ee769f2e2489e28f5.zip",
+          "objectKey": "749be03a8f6f7e3c66c69c20ad9cb25e9df6453e1ae380edc788b48e4d45f904.zip",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }
     },
-    "d604875b392d8d7924595cec30c0ddc576119cdf32ec20e27dfa48f82c4e6380": {
+    "841708fa9223dafdd8bde1bbf2978897b88cf3f6ca7b17567e520413c273202a": {
       "source": {
         "path": "SoftuniDemoStack.template.json",
         "packaging": "file"
@@ -22,7 +22,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "d604875b392d8d7924595cec30c0ddc576119cdf32ec20e27dfa48f82c4e6380.json",
+          "objectKey": "841708fa9223dafdd8bde1bbf2978897b88cf3f6ca7b17567e520413c273202a.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

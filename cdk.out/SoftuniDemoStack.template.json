@@ -120,7 +120,7 @@
      "S3Bucket": {
       "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
      },
-     "S3Key": "9c16b9fc010ee4da8949cba465084096007aeba71ee9d35ee769f2e2489e28f5.zip"
+     "S3Key": "749be03a8f6f7e3c66c69c20ad9cb25e9df6453e1ae380edc788b48e4d45f904.zip"
     },
     "Environment": {
      "Variables": {
@@ -146,7 +146,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "SoftuniDemoStack/homework-send-email-lambda/Resource",
-    "aws:asset:path": "asset.9c16b9fc010ee4da8949cba465084096007aeba71ee9d35ee769f2e2489e28f5",
+    "aws:asset:path": "/Users/A1BB78C/softuni-demo-two",
     "aws:asset:is-bundled": true,
     "aws:asset:property": "Code"
    }
